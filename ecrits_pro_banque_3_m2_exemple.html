@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exemple commenté — Une semaine, cinq écrits pour un même client</title>
+<style>
+:root{--prune:#8C1E70;--prune-fonce:#5E1349;--prune-clair:#F4E6EE;--accent:#C77BAA;
+ --vert:#283C28;--gris:#3C3C3C;--gris-moyen:#8A7A85;--filet:#E8DCE5;--creme:#FAF6F8;
+ --ok:#2F7A4F;--ko:#B23B3B;--amb:#B5852A;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--creme);color:var(--gris);
+ font-family:"Nunito","Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.62}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 60px}
+header.bandeau{background:var(--prune-fonce);color:#fff;padding:18px 0;border-bottom:4px solid var(--accent)}
+header.bandeau .wrap{padding-bottom:0}
+.chapitre{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#EAD3E3}
+.chapitre span{color:var(--accent);margin:0 6px}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:27px;line-height:1.25;margin:8px 0 4px;color:#fff}
+.sous{color:#EAD3E3;font-size:14.5px;margin:0}
+h2{font-family:Georgia,"Times New Roman",serif;font-size:20px;color:var(--prune-fonce);
+ margin:34px 0 0;padding-bottom:8px;border-bottom:2px solid var(--filet)}
+h2 .num{color:var(--accent);margin-right:8px}
+h3{font-size:15px;color:var(--vert);margin:20px 0 8px;letter-spacing:.02em}
+.carte{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:20px 22px;margin:18px 0;
+ box-shadow:0 1px 2px rgba(94,19,73,.05)}
+.enc{background:var(--prune-clair);border-left:5px solid var(--prune);padding:14px 18px;
+ border-radius:0 8px 8px 0;margin:18px 0;font-size:15.2px}
+.enc .t{display:block;font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+ font-weight:800;color:var(--prune-fonce);margin-bottom:6px}
+.enc.al{background:#FBF4F4;border-left-color:var(--ko)}.enc.al .t{color:var(--ko)}
+.enc.ci{background:#FCF8F0;border-left-color:var(--amb)}.enc.ci .t{color:#8A6418}
+.situ{background:#FCF9FB;border:1px dashed var(--filet);border-radius:8px;padding:16px 18px;margin:16px 0;font-size:15.2px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.duo>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:15px 17px;font-size:14.8px}
+.duo .h{font-weight:800;color:var(--prune-fonce);margin-bottom:7px;font-size:14.5px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.tri>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:14px 15px;font-size:14.3px}
+.quad{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.quad>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:12px 13px;font-size:13.6px}
+.quad .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13px;
+ text-transform:uppercase;letter-spacing:.04em}
+.tri .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13.5px;
+ text-transform:uppercase;letter-spacing:.05em}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.8px;background:#fff}
+th,td{border:1px solid var(--filet);padding:9px 12px;text-align:left}
+thead th{background:var(--prune-clair);color:var(--prune-fonce);font-size:13.5px}
+tbody th{font-weight:600;color:var(--gris)}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td,tr.tot th{background:#FBF3F8;font-weight:800;color:var(--prune-fonce)}
+.dl{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;text-decoration:none;
+ padding:11px 20px;border-radius:8px;font-weight:700;font-size:15px;margin:20px 0 4px}
+.dl:hover{background:var(--prune-fonce)}
+ol.q{padding-left:0;list-style:none;counter-reset:q}
+ol.q>li{margin:16px 0;padding-left:38px;position:relative}
+ol.q>li::before{counter-increment:q;content:counter(q);position:absolute;left:0;top:1px;
+ width:26px;height:26px;border-radius:50%;background:var(--prune-clair);color:var(--prune-fonce);
+ font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+b,strong{color:var(--vert)}
+footer{text-align:center;font-size:12.5px;color:var(--gris-moyen);padding:26px 18px 12px;
+ border-top:1px solid var(--filet);margin-top:44px}
+@media(max-width:860px){.quad{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.duo,.tri,.quad{grid-template-columns:1fr}h1{font-size:22px}}
+@media print{body{background:#fff}.dl{display:none}header.bandeau{background:#5E1349 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+.mail{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:0;margin:16px 0;overflow:hidden}
+.mail .ent{background:#F7F1F5;border-bottom:1px solid var(--filet);padding:10px 16px;font-size:14px}
+.mail .ent b{color:var(--prune-fonce)}
+.mail .txt{padding:14px 18px;font-size:15.2px}
+.mail p{margin:0 0 10px}
+.err{background:#FDECEC;border-bottom:2px solid var(--ko);padding:0 2px;border-radius:3px}
+.cor{display:none;background:#E9F6EE;border-bottom:2px solid var(--ok);padding:0 2px;border-radius:3px;color:var(--ok);font-weight:700}
+.nf{font-size:11px;vertical-align:super;font-weight:800;color:var(--ko)}
+body.vu .err{text-decoration:line-through;background:none;border:0;color:var(--gris-moyen)}
+body.vu .cor{display:inline}
+.btn{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;border:0;
+ padding:12px 22px;border-radius:8px;font-family:inherit;font-weight:800;font-size:15px;cursor:pointer}
+.btn:hover{background:var(--prune-fonce)}
+.liste{display:none}body.vu .liste{display:block}
+</style></head>
+<body>
+<header class="bandeau"><div class="wrap">
+ <div class="chapitre">Écrits professionnels · banque 3/5 <span>/</span> Module 2</div><h1>Une semaine, cinq écrits pour un même client</h1><p class="sous">Exemple commenté — Choisir le bon écrit</p>
+</div></header>
+<div class="wrap">
+
+<h2><span class="num">1 ·</span>Le dossier de M. Moreau</h2>
+<div class="carte">
+<p>M. Moreau ouvre un compte dans votre agence, puis demande un crédit à la consommation pour des travaux. En une semaine, le conseiller lui écrit cinq fois — et choisit à chaque fois un écrit différent. Lisez chaque message, puis le commentaire.</p>
+</div>
+
+<h2><span class="num">2 ·</span>Les cinq écrits</h2>
+<div class="carte">
+<div class="duo"><div><div class="h">Lundi · SMS</div>« M. Moreau, RDV confirmé mardi 25/11 à 10h, agence Wasquehal, pour l'ouverture de votre compte. Pensez à votre pièce d'identité. Votre conseiller, K. Delattre »</div>
+<div><div class="h">Pourquoi ce choix</div>Une information courte, à lire en déplacement. Le SMS est le seul écrit qui tolère les abréviations (RDV, h). Il ne contient <b>aucune donnée sensible</b> et ne demande <b>jamais</b> de code : un client sait ainsi qu'un SMS lui demandant ses identifiants est une fraude.</div></div>
+<div class="duo"><div><div class="h">Mardi · message sur le chat de l'espace client</div>« Bonjour Monsieur Moreau, votre compte est ouvert. Votre carte vous sera adressée sous huit jours et votre code par un courrier séparé. »</div>
+<div><div class="h">Pourquoi ce choix</div>Le client pose sa question dans le chat : on lui répond dans le même canal. Le chat demande de la rigueur : un message envoyé trop vite, tronqué ou fautif, ne se rattrape pas.</div></div>
+<div class="duo"><div><div class="h">Mercredi · mail</div>« Objet : Votre projet de travaux – pièces à fournir pour l'étude » … suivi de la liste des justificatifs en liste à puces.</div>
+<div><div class="h">Pourquoi ce choix</div>Plusieurs informations, une liste, la possibilité de joindre un document : le mail est l'écrit le plus polyvalent. On y écrit le projet, pas les données sensibles.</div></div>
+<div class="duo"><div><div class="h">Jeudi · lettre</div>Les documents contractuels du crédit sont remis au client en agence ou par courrier, avec la fiche d'information précontractuelle.</div>
+<div><div class="h">Pourquoi ce choix</div>Le mail n'est pas confidentiel. Les documents qui engagent ou qui portent des données personnelles détaillées passent par un canal sécurisé : remise en agence, courrier, ou espace client. Un mail peut <b>annoncer</b> leur envoi.</div></div>
+<div class="duo"><div><div class="h">Vendredi · compte rendu d'entretien</div>Note interne versée au dossier : besoin exprimé, justificatifs reçus, vérifications faites, prochaine étape.</div>
+<div><div class="h">Pourquoi ce choix</div>Ce n'est pas un écrit au client : il permet à un collègue de reprendre le dossier. C'est aussi la trace des vérifications que la réglementation impose.</div></div>
+</div>
+
+<h2><span class="num">3 ·</span>Et l'objectif de chaque écrit ?</h2>
+<div class="carte">
+<table><thead><tr><th>Écrit</th><th>Objectif principal</th></tr></thead><tbody>
+<tr><td>SMS du lundi</td><td><b>Confirmer</b> un rendez-vous (et rappeler une pièce à apporter)</td></tr>
+<tr><td>Chat du mardi</td><td><b>Informer</b> de l'ouverture du compte et des envois à venir</td></tr>
+<tr><td>Mail du mercredi</td><td><b>Demander</b> des justificatifs</td></tr>
+<tr><td>Lettre du jeudi</td><td><b>Remettre</b> des documents qui engagent</td></tr>
+<tr><td>Compte rendu du vendredi</td><td><b>Rendre compte</b> pour assurer le suivi du dossier</td></tr>
+</tbody></table>
+<div class="enc"><span class="t">CE QU'IL FAUT RETENIR</span>Avant d'écrire, deux questions : <b>quel est mon objectif ?</b> et <b>quel écrit le sert le mieux ?</b> Un écrit poursuit un objectif principal ; s'il en a deux, ils doivent être annoncés clairement.</div>
+<div class="enc al"><span class="t">LE RÉFLEXE CONFIDENTIALITÉ</span>Jamais de code, de numéro complet de carte ou de compte, ni de mot de passe dans un SMS, un chat ou un mail.</div>
+</div>
+
+
+<footer>TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A</footer>
+</div>
+</body></html>
